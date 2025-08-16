@@ -48,7 +48,7 @@
       transition: background-color 0.3s;
       margin-bottom: 15px;
     }
-
+    
     .analyze-btn:hover {
       background-color: #45a049;
     }
@@ -159,4 +159,26 @@
       color: #999;
       text-align: center;
       border-top: 1px solid #eee;
+    }
+    /* Add to style.css */
+    .clause-snippets {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed #eee;
+    }
+
+    .snippets-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    .snippet {
+      font-size: 12px;
+      color: #444;
+      font-style: italic;
+      margin-bottom: 5px;
+      padding-left: 10px;
+      border-left: 2px solid #4CAF50;
     }

@@ -1,6 +1,23 @@
 import { HF_API_TOKEN } from "./config.js";
-
 const HF_API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-mnli";
+
+function extractRelevantSnippets(text, label) {
+  const labelPatterns = {
+    "Third-Party Sharing": ["share", "third party", "partner", "vendor", "service provider"],
+    "User Rights": ["right to", "access", "delete", "correct", "request"],
+    "Data Retention": ["retain", "store", "keep", "period", "duration"]
+  };
+  
+  const patterns = labelPatterns[label] || [];
+  const sentences = text.split(/[.!?]\s+/);
+  
+  return sentences
+    .filter(sentence => patterns.some(pattern => 
+      new RegExp(pattern, "i").test(sentence)
+    ))
+    .slice(0, 3) // Limit to 3 most relevant sentences
+    .map(s => s.trim() + ".");
+}
 
 // Check if text contains policy content
 function hasPolicyText(text) {
@@ -68,23 +85,20 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "analyze-policy") {
     analyzeWithHF(request.text).then(hfResults => {
       const processed = processHFResults(hfResults);
-      
+    
       if (!processed) {
         sendResponse({ error: "Failed to analyze policy" });
         return;
       }
-      
-      // Get top 3 most relevant clauses
       const keyClauses = processed.slice(0, 3).map(item => ({
         name: item.label,
         confidence: Math.round(item.score * 100),
-        description: getDescriptionForLabel(item.label)
+        description: getDescriptionForLabel(item.label),
+        snippets: extractRelevantSnippets(request.text, item.label)
       }));
-      
       sendResponse({ keyClauses });
     });
-    
-    return true; // Required for async response
+    return true;
   }
 });
 

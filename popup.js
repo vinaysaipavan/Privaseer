@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
                   return;
                 }
                 
-                // Display AI analysis results
                 let clausesHTML = response.keyClauses.map(clause => `
                   <div class="clause">
                     <div class="clause-title">
@@ -64,6 +63,11 @@ document.addEventListener('DOMContentLoaded', function() {
                       <span class="clause-confidence">${clause.confidence}% confidence</span>
                     </div>
                     <div class="clause-desc">${clause.description}</div>
+                      ${clause.snippets && clause.snippets.length > 0 ? `
+                    <div class="clause-snippets">
+                      <div class="snippets-title">Relevant excerpts:</div>
+                      ${clause.snippets.map(snippet => `<div class="snippet">"${snippet}"</div>`).join('')}
+                    </div>` : ''}
                   </div>
                 `).join('');
                 
@@ -83,5 +87,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
-
-
