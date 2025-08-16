@@ -3,10 +3,13 @@
 Privaseer is a Chrome extension that uses AI to detect risky clauses in privacy policies.  
 It highlights threats like:
 
-- 🔄 Selling or sharing user data  
-- 📍 Location and biometric tracking  
-- 📂 Third-party data access  
-- ⚖️ Arbitration or waiver of rights
+
+- 🛡️ **Data Collection** – What personal information the service collects  
+- 📂 **Third-Party Sharing** – Whether your data is shared with other companies  
+- 👤 **User Rights** – Your rights to access or delete your data  
+- ⏳ **Data Retention** – How long your data is kept  
+- ⚖️ **Liability Limitations** – Limits on the service's responsibility  
+- 🌍 **Governing Law** – Which country’s laws apply to disputes 
 
 ## 🚀 Features
 
