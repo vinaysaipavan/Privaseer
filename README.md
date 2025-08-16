@@ -23,4 +23,26 @@ It highlights threats like:
 - JavaScript  
 - Chrome Extensions API  
 - Hugging Face Inference API  
-- HTML/CSS  
+- HTML/CSS 
+
+## 📖 How It Works  
+
+1. **Install the Extension**  
+   - Download or clone this repository  
+   - Load the extension into Chrome using **Developer Mode**  
+
+2. **Open a Privacy Policy Page**  
+   - Visit any website’s privacy policy page  
+
+3. **Run Privaseer**  
+   - Click on the Privaseer extension icon in your browser  
+   - The extension scans the page in real time  
+
+4. **AI Analysis**  
+   - The text is processed using the **Hugging Face Inference API**  
+   - Risky clauses are identified and scored  
+
+5. **View Results**  
+   - 🚨 Risky sentences are highlighted directly on the page  
+   - 🧠 A summary of key risks is displayed for quick understanding  
+
