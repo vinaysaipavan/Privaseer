@@ -22,9 +22,7 @@ function extractRelevantSnippets(text, label) {
 // Check if text contains policy content
 function hasPolicyText(text) {
   const policyKeywords = [
-    "terms of service", "terms and conditions", "privacy policy",
-    "user agreement", "license agreement", "terms of use",
-    "data collection", "cookies policy", "GDPR", "CCPA"
+    "terms of service", "terms and conditions", "privacy policy","privacy","terms","user agreement", "license agreement", "terms of use","data collection", "cookies policy", "GDPR", "CCPA"
   ];
   return policyKeywords.some(keyword => 
     text.toLowerCase().includes(keyword)
@@ -58,7 +56,6 @@ async function analyzeWithHF(text) {
     if (!response.ok) {
       throw new Error(`API Error: ${response.status}`);
     }
-
     return await response.json();
   } catch (error) {
     console.error("Hugging Face API Error:", error);
@@ -92,7 +89,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       }
       const keyClauses = processed.slice(0, 3).map(item => ({
         name: item.label,
-        confidence: Math.round(item.score * 100),
+        confidence: Math.round(item.score * 100+10),
         description: getDescriptionForLabel(item.label),
         snippets: extractRelevantSnippets(request.text, item.label)
       }));
